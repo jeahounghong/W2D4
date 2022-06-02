@@ -109,38 +109,39 @@ end
 #     3-dimensional array: [[['some data']]]
 def flatten(data)
 
+    arr = []
     if !data.kind_of?(Array)
         return [data]
     end
-    
-    arr = []
     data.each do |el|
-        if !el.kind_of?(Array)
-            arr << el
-        else
-            nested_loops = false
-            el.each do |el2|
-                nested_loops = true if el2.kind_of?(Array)
-            end
-            if nested_loops
-                arr << flatten(el)
-            else
-                el.each do |el2|
-                    arr << el2
-                end
-            end
+        arr += flatten(el)
+        # if !el.kind_of?(Array)
+        #     arr << el
+        # else
+        #     arr + flatten(el)
+        #     # nested_loops = false
+        #     # el.each do |el2|
+        #     #     nested_loops = true if el2.kind_of?(Array)
+        #     # end
+        #     # if nested_loops
+        #     #     arr + flatten(el)
+        #     # else
+        #     #     el.each do |el2|
+        #     #         arr << el2
+        #     #     end
+        #     # end
 
-        end
+        # end
     end
     return arr
 end
 
-# arr1 = [1,2,3,4,5]
-# p flatten(arr1)
-# arr2 = [1,[2,3],[4,5]]
-# p flatten(arr2)
-# arr3 = [1,[2,[3]],[4,[5]]]
-# p flatten(arr3)
+arr1 = [1,2,3,4,5]
+p flatten(arr1)
+arr2 = [1,[2,3],[4,5]]
+p flatten(arr2)
+arr3 = [1,[2,[3]],[4,[5]]]
+p flatten(arr3)
 
 # # if data.is_kind?(Array)
 #     #     if data.length 
