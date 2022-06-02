@@ -115,23 +115,7 @@ def flatten(data)
     end
     data.each do |el|
         arr += flatten(el)
-        # if !el.kind_of?(Array)
-        #     arr << el
-        # else
-        #     arr + flatten(el)
-        #     # nested_loops = false
-        #     # el.each do |el2|
-        #     #     nested_loops = true if el2.kind_of?(Array)
-        #     # end
-        #     # if nested_loops
-        #     #     arr + flatten(el)
-        #     # else
-        #     #     el.each do |el2|
-        #     #         arr << el2
-        #     #     end
-        #     # end
-
-        # end
+        # if !el.kind_of?(Arra
     end
     return arr
 end
