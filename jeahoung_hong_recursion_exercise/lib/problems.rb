@@ -12,7 +12,11 @@
 # pow(3, 4) # => 81
 # pow(4, 3) # => 64
 def pow(base, exponent)
-
+    if exponent == 0
+        return 1
+    else
+        return base*pow(base, exponent - 1)
+    end
 end
 
 
@@ -35,7 +39,9 @@ end
 # lucas_number(5)   # =>    11
 # lucas_number(9)   # =>    76
 def lucas_number(n)
-
+    return 2 if n == 0
+    return 1 if n == 1
+    return lucas_number(n-1) + lucas_number(n-2)
 end
 
 
@@ -51,7 +57,8 @@ end
 # sum_array([5, 2])         # => 7
 # sum_array([4, 10, -1, 2]) # => 15
 def sum_array(array)
-
+    return 0 if array.length == 0
+    return array[-1] + sum_array(array[0...-1])
 end
 
 
@@ -67,7 +74,8 @@ end
 # reverse_string("internet")    # => "tenretni"
 # reverse_string("friends")     # => "sdneirf"
 def reverse_string(str)
-
+    return "" if str.length == 0
+    return str[-1] + reverse_string(str[0...-1])
 end
 
 
@@ -101,4 +109,73 @@ end
 #     3-dimensional array: [[['some data']]]
 def flatten(data)
 
+    if !data.kind_of?(Array)
+        return [data]
+    end
+    
+    arr = []
+    data.each do |el|
+        if !el.kind_of?(Array)
+            arr << el
+        else
+            nested_loops = false
+            el.each do |el2|
+                nested_loops = true if el2.kind_of?(Array)
+            end
+            if nested_loops
+                arr << flatten(el)
+            else
+                el.each do |el2|
+                    arr << el2
+                end
+            end
+
+        end
+    end
+    return arr
 end
+
+# arr1 = [1,2,3,4,5]
+# p flatten(arr1)
+# arr2 = [1,[2,3],[4,5]]
+# p flatten(arr2)
+# arr3 = [1,[2,[3]],[4,[5]]]
+# p flatten(arr3)
+
+# # if data.is_kind?(Array)
+#     #     if data.length 
+#     # end
+#     #flat_array = true
+#     arr = []
+#     data.each do |el|
+#         if !el.kind_of?(Array)
+#             arr << el
+#         else
+#             nested_arrays = false
+#             arr2 = []
+#             el.each do |el2|
+#                 if el2.kind_of?(Array)
+#                     nested_arrays = true
+#                 end
+
+#             end
+#             if nested_arrays
+#                 # el.each do |el2|
+#                 #     if el2.kind_of?(Array
+#                 #        arr << flatten(el2)
+#                 #     else
+                         
+#                 #     end)
+#                 #     arr << el2
+#                 # end
+
+#                 arr << flatten(el)
+#             else
+#                 el.each do |el2|
+#                     arr << el2
+#                 end
+#             end
+
+#         end
+#     end
+#     return arr
